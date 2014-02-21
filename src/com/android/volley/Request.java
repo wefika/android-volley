@@ -417,7 +417,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
         return false;
     }
 
-    public void getContentOutputStream(OutputStream outputStream, Request<?> request) throws
+    public void getContentOutputStream(OutputStream outputStream) throws
             IOException, AuthFailureError {
         DataOutputStream out = new DataOutputStream(outputStream);
         out.write(getBody());
