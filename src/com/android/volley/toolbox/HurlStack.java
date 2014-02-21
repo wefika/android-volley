@@ -236,7 +236,7 @@ public class HurlStack implements HttpStack {
 
         if(request.handlesOutputStream()) {
             setBodyParams(connection, request);
-            request.getContentOutputStream(connection.getOutputStream(), request);
+            request.getContentOutputStream(connection.getOutputStream());
             return;
         }
 

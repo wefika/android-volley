@@ -24,13 +24,11 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 
 import com.android.volley.VolleyLog.MarkerLog;
-import com.android.volley.toolbox.HurlStack;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.Map;
