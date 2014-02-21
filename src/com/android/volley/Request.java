@@ -24,8 +24,13 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 
 import com.android.volley.VolleyLog.MarkerLog;
+import com.android.volley.toolbox.HurlStack;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.Map;
@@ -406,6 +411,17 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 
     public String getBodyContentType() {
         return "application/x-www-form-urlencoded; charset=" + getParamsEncoding();
+    }
+
+    public boolean handlesOutputStream() {
+        return true;
+    }
+
+    public void getContentOutputStream(HttpURLConnection connection, Request<?> request) throws
+            IOException, AuthFailureError {
+        DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+        out.write(getBody());
+        out.close();
     }
 
     /**

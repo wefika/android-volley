@@ -48,7 +48,7 @@ import javax.net.ssl.SSLSocketFactory;
  */
 public class HurlStack implements HttpStack {
 
-    private static final String HEADER_CONTENT_TYPE = "Content-Type";
+    public static final String HEADER_CONTENT_TYPE = "Content-Type";
 
     /**
      * An interface for transforming URLs before use.
@@ -233,13 +233,24 @@ public class HurlStack implements HttpStack {
 
     private static void addBodyIfExists(HttpURLConnection connection, Request<?> request)
             throws IOException, AuthFailureError {
+
+        if(request.handlesOutputStream()) {
+            setBodyParams(connection, request);
+            request.getContentOutputStream(connection, request);
+            return;
+        }
+
         byte[] body = request.getBody();
         if (body != null) {
-            connection.setDoOutput(true);
-            connection.addRequestProperty(HEADER_CONTENT_TYPE, request.getBodyContentType());
+            setBodyParams(connection, request);
             DataOutputStream out = new DataOutputStream(connection.getOutputStream());
             out.write(body);
             out.close();
         }
+    }
+
+    private static void setBodyParams(HttpURLConnection connection, Request<?> request) {
+        connection.setDoOutput(true);
+        connection.addRequestProperty(HEADER_CONTENT_TYPE, request.getBodyContentType());
     }
 }
