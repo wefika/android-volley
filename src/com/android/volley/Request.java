@@ -414,12 +414,12 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     }
 
     public boolean handlesOutputStream() {
-        return true;
+        return false;
     }
 
-    public void getContentOutputStream(HttpURLConnection connection, Request<?> request) throws
+    public void getContentOutputStream(OutputStream outputStream, Request<?> request) throws
             IOException, AuthFailureError {
-        DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+        DataOutputStream out = new DataOutputStream(outputStream);
         out.write(getBody());
         out.close();
     }
