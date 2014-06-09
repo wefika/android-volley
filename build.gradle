@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.8.+'
+        classpath 'com.android.tools.build:gradle:0.11.+'
     }
 }
 
@@ -34,7 +34,7 @@ android {
 
     sourceSets {
         defaultConfig {
-            testPackageName 'com.android.volley.tests'
+            testApplicationId 'com.android.volley.tests'
         }
 
         main {
